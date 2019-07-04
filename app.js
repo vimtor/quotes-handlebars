@@ -11,24 +11,9 @@ app.set('views engine', '.hbs');
 app.use(express.static('public'));
 
 // Basic Routing
-app.get('/', (req, res) => {
-    res.render('index.hbs', {
-        quotes: [
-            {
-                text: 'There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors.',
-                author: 'Jeff Atwood'
-            },
-            {
-                text: 'My name is Ralph!',
-                author: 'Ralph Wiggum'
-            },
-            {
-                text: 'Be water, my friend.',
-                author: 'Bruce Lee'
-            }
-        ]
-    });
-});
+app.use('/', require('./routes/index'));
+app.use('/login', require('./routes/login'));
+app.use('/register', require('./routes/register'));
 
 // Start the server
 const PORT = process.env.PORT || 5000;

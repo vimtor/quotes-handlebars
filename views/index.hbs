@@ -10,5 +10,14 @@
     </div>
 </div>
 
-{{> _loginModal}}
-{{> _signupModal}}
+
+{{#if showLoginModal}}
+
+    {{> _loginModal}}
+
+{{else if showRegisterModal}}
+
+    {{> _registerModal}}
+
+{{/if}}
+
