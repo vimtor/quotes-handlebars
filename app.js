@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 
 const app = express();
 
-
+// Connect to MongoDB
 mongoose.connect('mongodb://localhost/quotes-dev', {
     useNewUrlParser: true
 })
@@ -16,13 +16,16 @@ mongoose.connect('mongodb://localhost/quotes-dev', {
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('views engine', '.hbs');
 
+
 // Express Middleware.
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+
 // Basic Routing
 require('./routes')(app);
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;

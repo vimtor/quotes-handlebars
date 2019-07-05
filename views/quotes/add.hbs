@@ -7,27 +7,15 @@
 
         <form action="/quotes/add" method="post">
             <div class="field">
-                <label class="label">
-                    Author
-                </label>
-                <div class="control">
-                    <input class="input" type="text" name="author" value="{{author}}">
-                </div>
+                <input class="input" type="text" name="author" value="{{author}}" placeholder="Who said it?">
             </div>
             <div class="field">
-                <label class="label">
-                    Quote
-                </label>
-                <div class="control">
-                    <textarea class="textarea" name="quote">{{quote}}</textarea>
-                </div>
+                <textarea class="textarea" name="quote" placeholder="What did he said?">{{quote}}</textarea>
             </div>
             <div class="field">
-                <div class="control">
-                    <button class="button is-primary is-fullwidth">
-                        Submit
-                    </button>
-                </div>
+                <button class="button is-primary is-fullwidth">
+                    Submit
+                </button>
             </div>
         </form>
     </div>

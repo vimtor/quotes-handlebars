@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 router.get('/login', (req, res) => {
     res.render('users/login.hbs');
 });
@@ -8,5 +9,6 @@ router.get('/login', (req, res) => {
 router.get('/register', (req, res) => {
     res.render('users/register.hbs');
 });
+
 
 module.exports = router;
