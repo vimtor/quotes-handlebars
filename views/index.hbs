@@ -1,23 +1,16 @@
 <div class="section">
-    <div class="container">
-        <div class="columns">
-            {{#each quotes}}
-                <div class="column">
-                    {{> _quote}}
-                </div>
-            {{/each}}
+    {{#if quotes}}
+        <div class="container">
+            <div class="columns">
+                {{#each quotes}}
+                    <div class="column">
+                        {{> _quote}}
+                    </div>
+                {{/each}}
+            </div>
         </div>
-    </div>
+    {{else}}
+        <p>No quotes to show.</p>
+    {{/if}}
 </div>
-
-
-{{#if showLoginModal}}
-
-    {{> _loginModal}}
-
-{{else if showRegisterModal}}
-
-    {{> _registerModal}}
-
-{{/if}}
 

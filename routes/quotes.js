@@ -1,29 +1,47 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
+
+require('../models/Quote');
+const Quote = mongoose.model('Quote');
 
 router.get('/add', (req, res) => {
     res.render('quotes/add.hbs');
 });
 
 router.post('/add', (req, res) => {
-    const errors = [];
     const {author, quote} = req.body;
 
-    if (!author) {
-        errors.push({message: 'Please submit an author.'});
-    }
-
     if (!quote) {
-        errors.push({message: 'Quote cannot be empty.'});
-    }
-
-    if (errors.length > 0) {
         res.render('quotes/add.hbs', {
-            errors, author, quote
+            author,
+            quote,
+            messages: [
+                {
+                    text: 'Quote cannot be empty.',
+                    type: 'danger'
+                }
+            ]
         });
     }
     else {
-        res.render('quotes/add.hbs');
+        const newQuote = {
+            quote,
+            author: author !== '' ? author : undefined
+        };
+
+        new Quote(newQuote)
+            .save()
+            .then(quote => {
+                res.render('quotes/add.hbs', {
+                    messages: [
+                        {
+                            text: 'Quote added succesfully',
+                            type: 'success'
+                        }
+                    ]
+                });
+            });
     }
 });
 
