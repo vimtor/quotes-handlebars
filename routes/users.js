@@ -16,13 +16,17 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    // TODO: Use flask and check if passwords match.
+    // Check if passwords match.
+    if (req.body.password !== req.body.confirmPassword) {
+        req.flash('error', 'Passwords do not match.');
+        return res.redirect('/users/register');
+    }
 
     // Check if user already exists.
     User.findOne({email: req.body.email}).then(user => {
         if (user) {
-            // TODO: Use flask to display an error.
-            res.render('users/register.hbs')
+            req.flash('error', 'That user is already registered.');
+            return res.redirect('/users/register');
         }
 
         // Encrypt password.
@@ -37,9 +41,8 @@ router.post('/register', (req, res) => {
             // Insert new user to the database.
             new User(newUser).save()
                 .then(user => {
-                    // TODO: Use flask to display success message.
-                    console.log(`User with id: ${user.id}. Was added successfully.`);
-                    res.render('users/register.hbs');
+                    req.flash('success', 'Registered successfully!');
+                    res.redirect('/users/register');
                 })
                 .catch(err => console.log(err));
         });

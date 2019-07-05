@@ -1,7 +1,13 @@
-{{#each messages}}
-    <div class="message is-{{type}}">
+{{#if success_msg}}
+    <div class="message is-success">
         <div class="message-body">
-            <p>{{text}}</p>
+            <p>{{success_msg}}</p>
         </div>
     </div>
-{{/each}}
+{{else if error_msg}}
+    <div class="message is-danger">
+        <div class="message-body">
+            <p>{{error_msg}}</p>
+        </div>
+    </div>
+{{/if}}

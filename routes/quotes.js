@@ -11,16 +11,11 @@ router.get('/add', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-    const messages = [];
     const {author, quote} = req.body;
 
     if (!quote) {
-        messages.push({
-            text: 'Quote cannot be empty.',
-            type: 'danger'
-        });
-
-        return res.render('quotes/add.hbs', {author, quote, messages});
+        req.flash('error', 'Quote cannot be empty');
+        return res.redirect('/quotes/add');
     }
 
     const newQuote = {
@@ -31,12 +26,8 @@ router.post('/add', (req, res) => {
     new Quote(newQuote)
         .save()
         .then(quote => {
-            messages.push({
-                text: 'Quote added succesfully',
-                type: 'success'
-            });
-
-            res.render('quotes/add.hbs', {messages});
+            req.flash('success', 'Quote added succesfully!');
+            res.redirect('/quotes/add',);
         });
 });
 
