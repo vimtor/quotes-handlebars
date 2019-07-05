@@ -1,19 +1,30 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 
 const app = express();
+
+
+mongoose.connect('mongodb://localhost/quotes-dev', {
+    useMongoClient: true
+})
+    .then(() => {
+        console.log('MongoDB is connected.');
+    })
+    .catch(err => console.log(err));
+
 
 // Handlebars Middleware
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('views engine', '.hbs');
 
-// Use 'public' folder for static assets.
+// Express Middleware.
 app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 // Basic Routing
-app.use('/', require('./routes/index'));
-app.use('/login', require('./routes/login'));
-app.use('/register', require('./routes/register'));
+require('./routes')(app);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
