@@ -6,11 +6,9 @@ const app = express();
 
 
 mongoose.connect('mongodb://localhost/quotes-dev', {
-    useMongoClient: true
+    useNewUrlParser: true
 })
-    .then(() => {
-        console.log('MongoDB is connected.');
-    })
+    .then(() => console.log('MongoDB is connected.'))
     .catch(err => console.log(err));
 
 
