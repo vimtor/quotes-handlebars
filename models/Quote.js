@@ -14,6 +14,10 @@ const quoteSchema = new Schema({
         type: String,
         required: true
     },
+    visible: {
+        type: Boolean,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now

@@ -1,8 +1,14 @@
 {{#if quotes}}
     <div class="columns">
         {{#each quotes}}
-            <div class="column">
+            <div class="column card">
                 {{> _quote}}
+
+                <footer class="card-footer">
+                    <p class="card-footer-item">
+                        <a href="/quotes/edit/{{id}}">Edit</a>
+                    </p>
+                </footer>
             </div>
         {{/each}}
     </div>
