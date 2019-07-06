@@ -8,10 +8,16 @@ const passport = require('passport');
 const favicon = require('serve-favicon');
 const path = require('path');
 
+// Get private variables.
+require('dotenv').config();
+const keys = require('./config/keys');
+
 const app = express();
 
 // Connect to MongoDB
-require('./config/database')(mongoose);
+mongoose.connect(keys.mongoURI, {useNewUrlParser: true})
+    .then(() => console.log('MongoDB is connected.'))
+    .catch(err => console.log(err));
 
 // Handlebars Middleware
 app.engine('.hbs', exphbs({extname: '.hbs'}));
@@ -24,7 +30,7 @@ app.use(express.urlencoded({extended: true}));
 
 // Express Session Middleware.
 app.use(session({
-    secret: 'secret',
+    secret: keys.sessionSecret,
     resave: true,
     saveUninitialized: true
 }));
