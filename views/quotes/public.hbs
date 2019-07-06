@@ -1,0 +1,11 @@
+{{#if quotes}}
+    <div class="columns">
+        {{#each quotes}}
+            <div class="column">
+                {{> _quote}}
+            </div>
+        {{/each}}
+    </div>
+{{else}}
+    <p>No quotes to show.</p>
+{{/if}}

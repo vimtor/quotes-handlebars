@@ -6,6 +6,12 @@ const router = express.Router();
 require('../models/Quote');
 const Quote = mongoose.model('Quote');
 
+router.get('/private', ensureAutheticated, (req, res) => {
+    Quote.find({user: req.user.id})
+        .then(quotes => {
+            res.render('quotes/private.hbs', {quotes});
+        })
+});
 
 router.get('/add', ensureAutheticated, (req, res) => {
     res.render('quotes/add.hbs');
@@ -21,14 +27,15 @@ router.post('/add', ensureAutheticated, (req, res) => {
 
     const newQuote = {
         quote,
-        author: author !== '' ? author : undefined
+        author: author !== '' ? author : undefined,
+        user: req.user.id
     };
 
     new Quote(newQuote)
         .save()
         .then(quote => {
             req.flash('success', 'Quote added succesfully!');
-            res.redirect('/quotes/add',);
+            res.redirect('/quotes/private',);
         });
 });
 

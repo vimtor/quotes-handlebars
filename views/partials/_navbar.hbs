@@ -5,9 +5,14 @@
                 <a href="/" class="navbar-item">
                     Public Quotes
                 </a>
-                <a href="/quotes/add" class="navbar-item">
-                    Add Quote
-                </a>
+                {{#if user}}
+                    <a href="/quotes/private" class="navbar-item">
+                        Your Quotes
+                    </a>
+                    <a href="/quotes/add" class="navbar-item">
+                        Add Quote
+                    </a>
+                {{/if}}
             </div>
 
             <div class="navbar-end">
