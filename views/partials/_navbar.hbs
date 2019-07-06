@@ -11,6 +11,18 @@
             </div>
 
             <div class="navbar-end">
+
+            </div>
+
+            {{#if user}}
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a href="/users/logout" class="button">
+                            Log Out
+                        </a>
+                    </div>
+                </div>
+            {{else}}
                 <div class="navbar-item">
                     <div class="buttons">
                         <a href="/users/register" class="button is-primary">
@@ -23,7 +35,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            {{/if}}
         </div>
     </div>
 </nav>

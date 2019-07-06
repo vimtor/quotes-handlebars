@@ -3,6 +3,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
+const passport = require('passport');
 
 const app = express();
 
@@ -34,10 +35,18 @@ app.use(session({
 // Flash Middleware
 app.use(flash());
 
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Setup passport strategy
+require('./config/passport')(passport);
+
 // Global Variables
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success');
     res.locals.error_msg = req.flash('error');
+    res.locals.user = req.user || null;
 
     next();
 });
