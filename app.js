@@ -1,52 +1,20 @@
 const express = require('express');
-const flash = require('connect-flash');
-const session = require('express-session');
 const mongoose = require('mongoose');
-const exphbs = require('express-handlebars');
-const back = require('express-back');
 const passport = require('passport');
-const favicon = require('serve-favicon');
-const path = require('path');
+
+const app = express();
 
 // Get private variables.
 require('dotenv').config();
 const keys = require('./config/keys');
 
-const app = express();
+// Setup Middlewares
+require('./config/middlewares')(app);
 
 // Connect to MongoDB
 mongoose.connect(keys.mongoURI, {useNewUrlParser: true})
     .then(() => console.log('MongoDB is connected.'))
     .catch(err => console.log(err));
-
-// Handlebars Middleware
-app.engine('.hbs', exphbs({extname: '.hbs'}));
-app.set('views engine', '.hbs');
-
-// Express Middleware.
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-// Express Session Middleware.
-app.use(session({
-    secret: keys.sessionSecret,
-    resave: true,
-    saveUninitialized: true
-}));
-
-// Flash Middleware
-app.use(flash());
-
-// Express Back Middleware
-app.use(back());
-
-// Express Favicon
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
-// Passport Middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Setup passport strategy
 require('./config/passport')(passport);
@@ -63,10 +31,12 @@ app.use((req, res, next) => {
 // Basic Routing
 require('./routes')(app);
 
-
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log('Server started on port:', PORT);
-    console.log('http://localhost:5000/');
+
+    if (process.env.NODE_ENV !== 'production') {
+        console.log('http://localhost:5000/');
+    }
 });
