@@ -52,16 +52,18 @@ router.post('/add', ensureAutheticated, (req, res) => {
 });
 
 router.get('/edit/:id', ensureAutheticated, (req, res) => {
-    // TODO: Check if user is the same.
     Quote.findById(req.params.id)
         .then(quote => {
+            if (quote.user !== req.user.id) {
+                req.flash('error', 'Not authorized.');
+                return res.redirect('/quotes/public');
+            }
+
             res.render('quotes/edit.hbs', {quote});
         });
 });
 
 router.post('/edit/:id', ensureAutheticated, (req, res) => {
-    console.log(req.body);
-
     Quote.findById(req.params.id)
         .then(quote => {
             quote.author = req.body.author;
@@ -88,5 +90,29 @@ router.post('/edit/:id', ensureAutheticated, (req, res) => {
         });
 });
 
+router.post('/like/:id', (req, res) => {
+    Quote.findById(req.params.id)
+        .then(quote => {
+            quote.likes += 1;
+
+            quote.save()
+                .then(() => {
+                    res.back();
+                })
+                .catch(err => {
+                    console.log(err);
+
+                    req.flash('error', 'Failed at liking the quote.');
+                    res.back();
+                });
+        })
+        .catch(err => {
+            console.log(err);
+
+            req.flash('error', 'Failed at liking the quote.');
+            res.back();
+            ;
+        });
+});
 
 module.exports = router;

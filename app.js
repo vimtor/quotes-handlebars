@@ -3,22 +3,19 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
+const back = require('express-back');
 const passport = require('passport');
+const favicon = require('serve-favicon');
+const path = require('path');
 
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/quotes-dev', {
-    useNewUrlParser: true
-})
-    .then(() => console.log('MongoDB is connected.'))
-    .catch(err => console.log(err));
-
+require('./config/database')(mongoose);
 
 // Handlebars Middleware
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('views engine', '.hbs');
-
 
 // Express Middleware.
 app.use(express.static('public'));
@@ -34,6 +31,12 @@ app.use(session({
 
 // Flash Middleware
 app.use(flash());
+
+// Express Back Middleware
+app.use(back());
+
+// Express Favicon
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // Passport Middleware
 app.use(passport.initialize());

@@ -14,6 +14,10 @@ const quoteSchema = new Schema({
         type: String,
         required: true
     },
+    likes: {
+        type: Number,
+        default: 0
+    },
     visible: {
         type: Boolean,
         required: true
