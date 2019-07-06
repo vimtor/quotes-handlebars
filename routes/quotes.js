@@ -1,16 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const {ensureAutheticated} = require('../helpers/auth');
 const router = express.Router();
 
 require('../models/Quote');
 const Quote = mongoose.model('Quote');
 
 
-router.get('/add', (req, res) => {
+router.get('/add', ensureAutheticated, (req, res) => {
     res.render('quotes/add.hbs');
 });
 
-router.post('/add', (req, res) => {
+router.post('/add', ensureAutheticated, (req, res) => {
     const {author, quote} = req.body;
 
     if (!quote) {
