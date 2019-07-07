@@ -1,4 +1,6 @@
 const express = require('express');
+require('express-async-errors');
+
 const mongoose = require('mongoose');
 const passport = require('passport');
 
@@ -24,6 +26,9 @@ require('./config/globals')(app);
 
 // Basic Routing
 require('./routes')(app);
+
+// Error Handling
+require('./helpers/errors')(app);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
