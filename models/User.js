@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     email: {
         type: String,
-        required: true
     },
     password: {
         type: String
@@ -14,6 +13,9 @@ const userSchema = new Schema({
         default: Date.now
     },
     googleId: {
+        type: String
+    },
+    githubId: {
         type: String
     }
 });

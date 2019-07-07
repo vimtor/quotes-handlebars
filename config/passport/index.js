@@ -7,5 +7,6 @@
 module.exports = function (passport) {
     require('./serialize')(passport);
     require('./google')(passport);
+    require('./github')(passport);
     require('./local')(passport);
 };

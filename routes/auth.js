@@ -17,4 +17,14 @@ router.get('/google/callback',
     })
 );
 
+router.get('/github', passport.authenticate('github', {scope: ['user:email']}));
+
+router.get('/github/callback',
+    passport.authenticate('github', {
+        successRedirect: '/quotes/private',
+        failureRedirect: '/users/login',
+        failureFlash: true
+    })
+);
+
 module.exports = router;
