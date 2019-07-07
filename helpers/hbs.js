@@ -6,5 +6,12 @@ module.exports = {
     },
     equals(arg1, arg2) {
         return arg1 === arg2;
+    },
+    currentNavigation(text, desiredUrl, currentUrl) {
+        if (desiredUrl === currentUrl) {
+            return `<strong>${text}</strong>`;
+        }
+
+        return text;
     }
 };

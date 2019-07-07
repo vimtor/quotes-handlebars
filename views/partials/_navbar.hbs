@@ -3,14 +3,32 @@
         <div class="navbar-menu">
             <div class="navbar-start">
                 <a href="/" class="navbar-item">
-                    Public Quotes
+                    {{#if (equals "/quotes/public" url)}}
+                        <span class="has-text-weight-medium">
+                            Public Quotes
+                        </span>
+                    {{else}}
+                        Public Quotes
+                    {{/if}}
                 </a>
                 {{#if user}}
                     <a href="/quotes/private" class="navbar-item">
-                        Your Quotes
+                        {{#if (equals "/quotes/private" url)}}
+                            <span class="has-text-weight-medium">
+                                Your Quotes
+                            </span>
+                        {{else}}
+                            Your Quotes
+                        {{/if}}
                     </a>
                     <a href="/quotes/add" class="navbar-item">
-                        Add Quote
+                        {{#if (equals "/quotes/add" url)}}
+                            <span class="has-text-weight-medium">
+                                Add Quote
+                            </span>
+                        {{else}}
+                            Add Quote
+                        {{/if}}
                     </a>
                 {{/if}}
             </div>
