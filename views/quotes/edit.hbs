@@ -14,11 +14,19 @@
                 <input class="input" type="text" name="author" value="{{quote.author}}" placeholder="Who said it?">
             </div>
             <div class="field">
-                <textarea class="textarea" name="quote" placeholder="What did he said?">{{quote.quote}}</textarea>
+                <textarea class="textarea" maxlength="200" name="quote"
+                          placeholder="What did he said?">{{quote.quote}}</textarea>
             </div>
             <div class="field">
                 <button class="button is-primary is-fullwidth">
                     Save
+                </button>
+            </div>
+        </form>
+        <form method="post" action="/quotes/delete/{{quote.id}}">
+            <div class="field">
+                <button class="button is-primary is-fullwidth is-danger">
+                    Delete
                 </button>
             </div>
         </form>

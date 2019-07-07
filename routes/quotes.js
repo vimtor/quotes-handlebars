@@ -111,7 +111,29 @@ router.post('/like/:id', (req, res) => {
 
             req.flash('error', 'Failed at liking the quote.');
             res.back();
-            ;
+        });
+});
+
+router.post('/delete/:id', ensureAutheticated, (req, res) => {
+    Quote.findById(req.params.id)
+        .then(quote => {
+            quote.delete()
+                .then(() => {
+                    req.flash('success', 'Deleted successfully.');
+                    res.redirect('/quotes/private');
+                })
+                .catch(err => {
+                    console.log(err);
+
+                    req.flash('error', 'Failed at deleting the quote.');
+                    res.back();
+                });
+        })
+        .catch(err => {
+            console.log(err);
+
+            req.flash('error', 'Failed at deleting the quote.');
+            res.back();
         });
 });
 
