@@ -10,7 +10,7 @@ module.exports = function (passport) {
     passport.use(new GithubStrategy({
         clientID: githubClientID,
         clientSecret: githubClientSecret,
-        callbackURL: "https://quotes-handlebars.herokuapp.com/auth/github/callback"
+        callbackURL: githubURI
     }, (accessToken, refreshToken, profile, done) => {
         User.findOne({githubId: profile.id})
             .then(user => {
