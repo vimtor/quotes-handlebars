@@ -23,7 +23,7 @@ router.get('/add', ensureAutheticated, (req, res) => {
     res.render('quotes/add.hbs');
 });
 
-router.post('/add', ensureAutheticated, (req, res) => {
+router.post('/', ensureAutheticated, (req, res) => {
     const {author, quote, visible} = req.body;
 
     if (!quote) {
@@ -63,7 +63,7 @@ router.get('/edit/:id', ensureAutheticated, (req, res) => {
         });
 });
 
-router.post('/edit/:id', ensureAutheticated, (req, res) => {
+router.put('/:id', ensureAutheticated, (req, res) => {
     Quote.findById(req.params.id)
         .then(quote => {
             quote.author = req.body.author;
@@ -114,7 +114,7 @@ router.post('/like/:id', (req, res) => {
         });
 });
 
-router.post('/delete/:id', ensureAutheticated, (req, res) => {
+router.delete('/:id', ensureAutheticated, (req, res) => {
     Quote.findById(req.params.id)
         .then(quote => {
             quote.delete()

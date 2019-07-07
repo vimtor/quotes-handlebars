@@ -6,6 +6,7 @@ const back = require('express-back');
 const passport = require('passport');
 const favicon = require('serve-favicon');
 const path = require('path');
+const methodOverride = require('method-override');
 
 const keys = require('./keys');
 
@@ -16,6 +17,9 @@ module.exports = function (app) {
         helpers: require('../helpers/hbs')
     }));
     app.set('views engine', '.hbs');
+
+    // Custom HTTP request
+    app.use(methodOverride('_method'));
 
     // Express Middleware.
     app.use(express.static('public'));

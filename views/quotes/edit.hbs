@@ -3,7 +3,8 @@
         <h1 class="title has-text-centered">
             Edit Quote
         </h1>
-        <form method="post" action="/quotes/edit/{{quote.id}}">
+        <form method="post" action="/quotes/{{quote.id}}?_method=PUT">
+            <input type="hidden" name="_method" value="PUT">
             <div class="field">
                 <label class="checkbox">
                     <input type="checkbox" name="visible" value="{{quote.visible}}">
@@ -23,7 +24,8 @@
                 </button>
             </div>
         </form>
-        <form method="post" action="/quotes/delete/{{quote.id}}">
+        <form method="post" action="/quotes/{{quote.id}}?_method=DELETE">
+            <input type="hidden" name="_method" value="DELETE">
             <div class="field">
                 <button class="button is-primary is-fullwidth is-danger">
                     Delete
