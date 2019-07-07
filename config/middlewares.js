@@ -11,7 +11,10 @@ const keys = require('./keys');
 
 module.exports = function (app) {
     // Handlebars Middleware
-    app.engine('.hbs', exphbs({extname: '.hbs'}));
+    app.engine('.hbs', exphbs({
+        extname: '.hbs',
+        helpers: require('../helpers/hbs')
+    }));
     app.set('views engine', '.hbs');
 
     // Express Middleware.
