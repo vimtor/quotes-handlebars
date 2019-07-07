@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('../../models/User');
 const User = mongoose.model('User');
 
-const {githubClientID, githubClientSecret} = require('../keys');
+const {githubClientID, githubClientSecret, githubURI} = require('../keys');
 
 module.exports = function (passport) {
     passport.use(new GithubStrategy({
