@@ -13,13 +13,12 @@ router.get('/login', (req, res) => {
     res.render('users/login.hbs');
 });
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
+router.post('/login', passport.authenticate('local', {
         successRedirect: '/quotes/private',
         failureRedirect: '/users/login',
         failureFlash: true
-    })(req, res, next);
-});
+    })
+);
 
 router.get('/register', (req, res) => {
     res.render('users/register.hbs');

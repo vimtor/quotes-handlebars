@@ -7,7 +7,7 @@ require('../models/Quote');
 const Quote = mongoose.model('Quote');
 
 router.get('/public', (req, res) => {
-    Quote.find({visible: true})
+    Quote.find({visible: true}).sort({'likes': 'desc'})
         .then(quotes => res.render('quotes/public.hbs', {quotes}))
         .catch(err => console.log(err));
 });

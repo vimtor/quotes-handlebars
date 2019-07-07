@@ -2,7 +2,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-require('../models/User');
+require('../../models/User');
 const User = mongoose.model('User');
 
 // Bind new Local Strategy.
@@ -28,14 +28,4 @@ module.exports = function (passport) {
             });
         })
     }));
-
-    passport.serializeUser(function (user, done) {
-        done(null, user.id);
-    });
-
-    passport.deserializeUser(function (id, done) {
-        User.findById(id, function (err, user) {
-            done(err, user);
-        });
-    });
 };

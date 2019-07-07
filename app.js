@@ -16,7 +16,7 @@ mongoose.connect(keys.mongoURI, {useNewUrlParser: true})
     .then(() => console.log('MongoDB is connected.'))
     .catch(err => console.log(err));
 
-// Setup passport strategy
+// Setup passport strategies
 require('./config/passport')(passport);
 
 // Global Variables

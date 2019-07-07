@@ -7,13 +7,15 @@ const userSchema = new Schema({
         required: true
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     date: {
         type: Date,
         default: Date.now
     },
+    googleId: {
+        type: String
+    }
 });
 
 mongoose.model('User', userSchema);
