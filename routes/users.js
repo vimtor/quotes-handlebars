@@ -8,7 +8,6 @@ const router = express.Router();
 require('../models/User');
 const User = mongoose.model('User');
 
-
 router.get('/login', (req, res) => {
     res.render('users/login.hbs');
 });
