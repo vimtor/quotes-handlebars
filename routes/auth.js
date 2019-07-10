@@ -1,11 +1,7 @@
 const express = require('express');
 const passport = require('passport');
-const mongoose = require('mongoose');
 
 const router = express.Router();
-
-require('../models/User');
-const User = mongoose.model('User');
 
 router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 

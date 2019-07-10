@@ -10,7 +10,7 @@ beforeAll(() => {
 });
 
 afterAll(() => {
-    return mongoDB.disconnect()
+    return mongoDB.disconnect();
 });
 
 describe('users', () => {
@@ -19,14 +19,14 @@ describe('users', () => {
         return user.post('/users/register')
             .send({email: 'test@test.com', password: '123', confirmPassword: '123'})
             .redirects(1)
-            .expect(/Registered successfully/)
+            .expect(/Registered successfully/);
     });
 
     it('able to login a valid user', () => {
         return user.post('/users/login')
             .send({email: 'test@test.com', password: '123'})
             .redirects(1)
-            .expect(/Your Quotes/)
+            .expect(/Your Quotes/);
     });
 
     it('add a public quote', () => {
@@ -34,13 +34,13 @@ describe('users', () => {
             .send({author: 'Someone', quote: 'Dummy quote', visible: true})
             .redirects(1)
             .expect(/Dummy quote/)
-            .expect(/Someone/)
+            .expect(/Someone/);
     });
 
     it('able to log out after loggin in', () => {
         return user.get('/users/logout')
             .redirects(1)
-            .expect(/See you/)
+            .expect(/See you/);
     });
 
     it('unable to login an invalid user', () => {

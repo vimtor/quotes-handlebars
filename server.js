@@ -3,7 +3,7 @@
 // This is decoupled from app.js so testing can be done independently.
 //
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const app = require('./app');
 const keys = require('./config/keys');
