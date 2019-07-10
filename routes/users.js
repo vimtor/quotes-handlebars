@@ -8,7 +8,9 @@ const router = express.Router();
 const {ensureAutheticated} = require('../helpers/auth');
 
 require('../models/User');
+require('../models/Quote');
 const User = mongoose.model('User');
+const Quote = mongoose.model('Quote');
 
 router.get('/login', (req, res) => {
     res.render('users/login.hbs');
@@ -64,6 +66,8 @@ router.get('/logout', ensureAutheticated, (req, res) => {
 router.delete('/', ensureAutheticated, async (req, res) => {
     const user = await User.findById(req.user.id);
     await user.delete();
+
+    await Quote.remove({user: req.user.id});
 
     req.flash('success', 'Hope you comeback someday!');
     res.redirect('/quotes/public');
