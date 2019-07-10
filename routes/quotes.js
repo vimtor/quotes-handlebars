@@ -64,14 +64,6 @@ router.put('/:id', ensureAutheticated, async (req, res) => {
     res.redirect('/quotes/private');
 });
 
-router.post('/like/:id', async (req, res) => {
-    const quote = await Quote.findById(req.params.id);
-    quote.likes += 1;
-
-    await quote.save();
-    res.back();
-});
-
 router.delete('/:id', ensureAutheticated, async (req, res) => {
     const quote = await Quote.findById(req.params.id);
     await quote.delete();

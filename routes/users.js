@@ -65,7 +65,7 @@ router.delete('/', ensureAutheticated, async (req, res) => {
     const user = await User.findById(req.user.id);
     await user.delete();
 
-    req.flash('success', 'Hope you comeback someday!')
+    req.flash('success', 'Hope you comeback someday!');
     res.redirect('/quotes/public');
 });
 
