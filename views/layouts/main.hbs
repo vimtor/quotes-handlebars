@@ -22,6 +22,11 @@
     </div>
 </section>
 
-<script src="/js/index.js"></script>
+{{#if user}}
+    {{> _deleteAccountModal}}
+    <script src="/js/deleteModal.js"></script>
+{{/if}}
+
+<script src="/js/likeQuotes.js"></script>
 </body>
 </html>

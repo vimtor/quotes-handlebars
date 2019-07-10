@@ -43,12 +43,9 @@
                         <a href="/users/logout" class="button">
                             Log Out
                         </a>
-                        <form method="post" action="/users?_method=DELETE" style="margin-bottom: 0">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button href="/users" class="button is-outlined is-danger">
-                                Delete Account
-                            </but>
-                        </form>
+                        <a id="delete-button" class="button is-outlined is-danger">
+                            Delete Account
+                        </a>
                     </div>
                 </div>
             {{else}}
