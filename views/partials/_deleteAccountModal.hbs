@@ -1,0 +1,32 @@
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content" >
+    <div class="box">
+        <div style="padding: 0 4rem">
+            <p class="has-text-centered title">
+                Are you sure?
+            </p>
+            <p class="has-text-centered subtitle">
+                Your quotes won't be deleted, but you won't be able to edit them anymore.
+            </p>
+            <div class="columns">
+                <div class="column">
+                    <form method="post" action="/users?_method=DELETE" style="margin-bottom: 0">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button href="/users" class="button is-danger is-fullwidth">
+                            Yes
+                        </button>
+                    </form>
+                </div>
+                <div class="column">
+                    <a id="close-button" class="button is-fullwidth">
+                        No
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+  </div>
+  <button id="close-button" class="modal-close is-large" aria-label="close"></button>
+</div>
