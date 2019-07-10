@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 
+const {ensureAutheticated} = require('../helpers/auth');
+
 require('../models/User');
 const User = mongoose.model('User');
 
@@ -52,11 +54,19 @@ router.post('/register', async (req, res) => {
     res.redirect('/users/register');
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', ensureAutheticated, (req, res) => {
     req.logout();
 
     req.flash('success', 'See you soon!');
     res.redirect('/users/login');
+});
+
+router.delete('/', ensureAutheticated, async (req, res) => {
+    const user = await User.findById(req.user.id);
+    await user.delete();
+
+    req.flash('success', 'Hope you comeback someday!')
+    res.redirect('/quotes/public');
 });
 
 
