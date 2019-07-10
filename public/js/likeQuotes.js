@@ -24,7 +24,7 @@
             throw body.error;
         }
 
-        return body.likes
+        return body.likes;
     }
 
 })();
