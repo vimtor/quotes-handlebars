@@ -19,6 +19,7 @@ module.exports = {
     "rules": {
         "semi": ["error", "always"],
         "semi-style": ["error", "last"],
-        "quotes": ["error", "single"]
+        "quotes": ["error", "single"],
+        "no-console": "off"
     }
 };
