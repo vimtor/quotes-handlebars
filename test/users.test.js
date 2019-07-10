@@ -50,8 +50,4 @@ describe('users', () => {
             .expect('Location', '/users/login');
     });
 
-    it('expect to fail (circleci test)', () => {
-        expect(1).toBe(2);
-    })
-
 });
