@@ -50,4 +50,8 @@ describe('users', () => {
             .expect('Location', '/users/login');
     });
 
+    it('Esto va a fallar', () => {
+        expect(2).toBe(1);
+    });
 });
+
